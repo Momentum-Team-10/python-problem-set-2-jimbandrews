@@ -6,7 +6,7 @@
 # If the item is not in the list, return the list unchanged.
 # If the item is in the list, remove all instances of it from the list.
 def remove(list_input, item):
-    list_copy = list_input
+    list_copy = list_input.copy()
     if item in list_copy:
         while item in list_copy:
             list_copy.remove(item)
@@ -31,7 +31,10 @@ def sum_list(num_list):
 # 4. Create a function called "average" that takes a list of numbers
 # and returns the average of those numbers.
 def average(num_list):
-    return sum_list(num_list) / len(num_list)
+    if num_list == []:
+        return None
+    else:
+        return sum_list(num_list) / len(num_list)
 
 
 # ------------------------------------------------------------------------------
@@ -39,11 +42,14 @@ def average(num_list):
 # returns the smallest number in that list. Write this function without using the
 # built-in `min()` function.
 def minimum(num_list):
-    minimum = num_list[0]
-    for number in num_list:
-        if number < minimum:
-            minimum = number
-    return minimum
+    if num_list == []:
+        return None
+    else:
+        minimum = num_list[0]
+        for number in num_list:
+            if number < minimum:
+                minimum = number
+        return minimum
 
 # ------------------------------------------------------------------------------
 # 6. There are many techniques to sort lists (or arrays) in programming. Many programming
@@ -70,7 +76,14 @@ def minimum(num_list):
 # Note 2: Selection sort can be implemented using one list. Read the explanation at
 # https://courses.cs.vt.edu/csonline/Algorithms/Lessons/SelectionSort/index.html
 # to see how. This may make more sense to you.
-
+def selection_sort(num_list):
+    list_copy = num_list.copy()
+    sorted_list = []
+    while len(sorted_list) < len(num_list):
+        least = minimum(list_copy)
+        sorted_list.append(least)
+        list_copy.remove(least)
+    return sorted_list
 
 # ------------------------------------------------------------------------------
 # 7. Create a function called "list_to_str" that takes a list and joins its items
@@ -78,3 +91,5 @@ def minimum(num_list):
 #
 # For example, `list_to_str(['Cadence', 'Ordel', 'Marion'])` results in the string
 # `"Cadence,Ordel,Marion"`
+def list_to_str(input_list):
+    return ",".join(input_list)
